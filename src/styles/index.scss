@@ -47,19 +47,19 @@ section#header {
     position: absolute;
     width: 100%;
     top: 0;
-    padding: 25px 0;
-    background: rgba(green, 0.1);
+    padding-top: 32.5px;
+    // background: rgba(green, 0.1);
 }
 
 section#footer {
     position: absolute;
     width: 100%;
     bottom: 0;
-    padding: 25px 0;
-    background: rgba(green, 0.1);
+    padding-bottom: 17.5px;
+    // background: rgba(green, 0.1);
 }
 
-.miniContainer {
+.outerContainer {
     margin: 0 auto;
     width: calc(100vw - 240px);
 }
@@ -88,7 +88,7 @@ section#footer {
         font-weight: 700;
         letter-spacing: 0.01em;
         height: 40px;
-        padding: 7.75px 13px;
+        padding: 8px 13px;
         color: $darkButtonText;
         background: $darkButtonBack;
     }
@@ -170,12 +170,14 @@ section#header .row1 {
 }
 
 .lineNavWrapper {
+    min-height: 40px;
     display: flex;
     position: relative;
 
     flex-direction: row;
 
     justify-content: flex-end;
+    // justify-content: space-between;
     align-items: center;
 
     .boldLineRack {
@@ -188,7 +190,34 @@ section#header .row1 {
         background: $globalText;
     }
 
+    .lineRackTitle {
+        position: absolute;
+        z-index: -99;
+        left: 0px;
+        top: -10px;
+
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.005em;
+    }
+
     .navRightButton {
         float: right;
+    }
+}
+
+.footerNavBar {
+    display: flex;
+    justify-content: flex-start;
+    a {
+        border-radius: 1px;
+        color: $dark80;
+        font-size: 14px;
+        display: block;
+        padding: 12.5px 25px;
+
+        &:hover:not(:active) {
+            background: $dark07;
+        }
     }
 }

@@ -6,9 +6,10 @@ import logo from '../icons/logo.svg'
 
 import '../styles/Home.scss'
 
-const HeaderNav: React.FC = () => (
+const HeaderNav: React.FC<{ children?: any }> = ({ children }) => (
     <div className="lineNavWrapper">
         <div className="boldLineRack" />
+        <div className="lineRackTitle">{children}</div>
         <Button className="navRightButton">
             <i className="fas fa-caret-right" />
             <div className="horizSpace" />
@@ -17,9 +18,15 @@ const HeaderNav: React.FC = () => (
     </div>
 )
 
+const FooterNav: React.FC = () => (
+    <div className="lineNavWrapper">
+        <div className="boldLineRack" />
+    </div>
+)
+
 const Header: React.FC = () => (
     <section id="header">
-        <div className="miniContainer">
+        <div className="outerContainer">
             <div className="row1">
                 <div id="headerTitle">
                     <div id="headerTitleRectangle" />
@@ -40,14 +47,25 @@ const Header: React.FC = () => (
                     </Button>
                 </div>
             </div>
-            <HeaderNav />
+            <HeaderNav>
+                <i className="fas fa-disc-drive" />
+                <div className="horizSpace" />
+                BROWSE MUSIC
+            </HeaderNav>
         </div>
     </section>
 )
 
 const Footer: React.FC = () => (
     <section id="footer">
-        <div className="miniContainer">Footer</div>
+        <div className="outerContainer">
+            <FooterNav />
+            <div className="footerNavBar">
+                <a>About</a>
+                <a>Help</a>
+                <a>Legal</a>
+            </div>
+        </div>
     </section>
 )
 
