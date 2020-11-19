@@ -4,18 +4,30 @@ import logo from '../icons/logo.svg'
 
 import '../styles/Home.scss'
 
+const Header: React.FC = () => (
+    <section id="header">
+        <div className="miniContainer">
+            <div id="headerTitle">
+                <div id="headerTitleRectangle" />
+                <span>Video Game Music Chord Compendium</span>
+                <h1>VGChords</h1>
+            </div>
+        </div>
+    </section>
+)
+
+const Footer: React.FC = () => (
+    <section id="footer">
+        <div className="miniContainer">Footer</div>
+        <i className="fas fa-acorn" />
+    </section>
+)
+
 export const Home: React.FC = () => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
+        <div id="global">
+            <Header />
+            <Footer />
         </div>
     )
 }

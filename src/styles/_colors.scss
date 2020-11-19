@@ -1,2 +1,4 @@
-$textColor: rgba(black, 0.9);
-$globalBackground: rgb(252, 251, 251);
+$globalText: #222;
+$globalBack: white;
+
+$radialBack: radial-gradient(farthest-corner at 75vw 30vh, white 0%, rgba(black, 0.05) 50%, rgba(black, 0.2) 100%);
