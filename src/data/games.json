@@ -1,0 +1,233 @@
+[
+  {
+    "type": "game",
+    "name": "Pokemon TCG 2",
+    "artists": ["Ichiro Shimakura"],
+    "releaseYear": 2001,
+    "franchises": ["Pokemon", "Nintendo"],
+    "tracks": [
+      {
+        "name": "Great Rocket Battle",
+        "altNames": ["Team GR Battle"],
+        "lengthSec": 144,
+        "createdAt": "2020-11-19"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Monster Hunter: World",
+    "artists": ["?"],
+    "releaseYear": 2017,
+    "franchises": ["Monster Hunter"],
+    "tracks": [
+      {
+        "name": "Rotten Vale Battle Theme",
+        "lengthSec": 134,
+        "createdAt": "2020-12-01"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Pokemon G/S/C",
+    "releaseYear": 1999,
+    "altNames": ["Pokemon GSC", "Pokemon Gold and Silver Versions"],
+    "artists": ["?", "?"],
+    "tracks": [
+      {
+        "name": "Goldenrod Game Corner",
+        "lengthSec": 60,
+        "createdAt": "2020-12-01"
+      },
+      {
+        "name": "Ecruteak City",
+        "altNames": ["Cianwood City"],
+        "lengthSec": 66,
+        "createdAt": "2020-12-01"
+      },
+      {
+        "name": "Azalea Town",
+        "altNames": ["Blackthorn City"],
+        "lengthSec": 52,
+        "createdAt": "2020-12-01"
+      },
+      {
+        "name": "National Park",
+        "lengthSec": 66,
+        "createdAt": "2020-12-01"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Skullgirls",
+    "releaseYear": 2012,
+    "artists": ["Michiru Yamane"],
+    "tracks": [
+      {
+        "name": "In A Moment's Time",
+        "parentheses": "Ending Theme",
+        "lengthSec": 269,
+        "createdAt": "2020-11-27"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Kingdom Hearts",
+    "releaseYear": 2002,
+    "franchises": ["Kingdom Hearts"],
+    "artists": ["Yoko Shimomura"],
+    "tracks": [
+      {
+        "name": "Hand in Hand",
+        "altNames": ["Traverse Town Battle Theme"],
+        "lengthSec": 70,
+        "createdAt": "2020-11-21"
+      },
+      {
+        "name": "Traverse Town",
+        "lengthSec": 34,
+        "createdAt": "2020-11-21"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Kingdom Hearts 2",
+    "releaseYear": 2004,
+    "altNames": ["Kingdom Hearts II"],
+    "franchises": ["Kingdom Hearts"],
+    "artists": ["Yoko Shimomura"],
+    "tracks": [
+      {
+        "name": "Roxas's Theme",
+        "altNames": ["Roxas"],
+        "lengthSec": 50,
+        "createdAt": "2020-11-21"
+      },
+      {
+        "name": "Twilight Town",
+        "lengthSec": 85,
+        "createdAt": "2020-11-21"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Super Mario RPG",
+    "releaseYear": 1996,
+    "subtitle": "Legend of the Seven Stars",
+    "franchises": ["Mario", "Mario & Luigi"],
+    "artists": ["Yoko Shimomura"],
+    "tracks": [
+      {
+        "name": "Beware the Forest's Mushrooms",
+        "lengthSec": 55,
+        "createdAt": "2020-12-02"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Final Fantasy XIII",
+    "releaseYear": 2009,
+    "altNames": ["Final Fantasy 13"],
+    "franchises": ["Final Fantasy"],
+    "artists": ["Masashi Hamauzu"],
+    "tracks": [
+      {
+        "name": "Lightning's Theme",
+        "lengthSec": 143,
+        "createdAt": "2020-11-17"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Final Fantasy VII Remake",
+    "releaseYear": 2020,
+    "altNames": ["Final Fantasy 7 Remake"],
+    "franchises": ["Final Fantasy"],
+    "artists": ["Nobuo Uematsu", "Masashi Hamauzu", "Mitsuto Suzuki", "Shotaro Shima"],
+    "tracks": [
+      {
+        "name": "Tifa's Theme - Seventh Heaven",
+        "altNames": "Tifa's Theme",
+        "lengthSec": 131,
+        "artists": ["Nobuo Uematsu", "Shotaro Shima"],
+        "createdAt": "2020-11-25"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Fire Emblem: Three Houses",
+    "releaseYear": 2019,
+    "altNames": ["Fire Emblem 16"],
+    "franchises": ["Fire Emblem"],
+    "artists": ["Takeru Kanazaki", "Hiroki Morishita", "Rei Kondoh"],
+    "tracks": [
+      {
+        "name": "Fódlan Winds",
+        "altNames": "Fodlan Winds",
+        "lengthSec": 158,
+        "createdAt": "2020-11-30"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "NieR:Automata",
+    "releaseYear": 2017,
+    "altNames": ["Nier Automata", "Nier: Automata"],
+    "franchises": ["Nier"],
+    "artists": ["Keiichi Okabe", "Keigo Hoashi", "Kuniyuki Takahashi", "Kakeru Ishihama"],
+    "tracks": [
+      {
+        "name": "City Ruins",
+        "artists": ["Keiichi Okabe"],
+        "lengthSec": 116,
+        "createdAt": "2020-11-19"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Wipeout 3",
+    "altNames": "wip3out",
+    "releaseYear": 1999,
+    "franchises": ["Wipeout"],
+    "artists": [],
+    "tracks": [
+      {
+        "name": "Xpander",
+        "artists": ["Sasha"],
+        "lengthSec": 247,
+        "createdAt": "2020-11-19"
+      }
+    ]
+  },
+  {
+    "type": "game",
+    "name": "Minecraft",
+    "releaseYear": 2011,
+    "franchises": [],
+    "artists": ["C418", "Lena Raine"],
+    "tracks": [
+      {
+        "name": "Pigstep",
+        "artists": ["Lena Raine"],
+        "lengthSec": 145,
+        "createdAt": "2020-11-29"
+      },
+      {
+        "name": "Sweden",
+        "artists": ["C418"],
+        "lengthSec": 215,
+        "createdAt": "2020-11-06"
+      }
+    ]
+  }
+]

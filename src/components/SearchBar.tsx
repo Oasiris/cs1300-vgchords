@@ -14,7 +14,10 @@ export class SearchBar extends React.Component<SearchBarType> {
                     type="text"
                     placeholder={this.props.placeholder !== 'undefined' ? this.props.placeholder : 'Find game music...'}
                 /> */}
-                <input type="text" placeholder="Find game music..." />
+                <label>
+                    <span className="_labelText">Search:</span>
+                    <input type="text" placeholder="Find game music..." />
+                </label>
                 <div className="_leftFlourish">
                     <div />
                     <div />

@@ -35,26 +35,28 @@ const HeaderTitle: React.FC<{ title: string; subtitle: string }> = ({ title, sub
 
 export const Header: React.FC<{ children: any }> = ({ children }) => (
     <section id="header">
-        <div className="outerContainer">
-            <div className="row1">
-                <HeaderTitle title="VGChords" subtitle="Video Game Music Chord Compendium" />
-                <div>
-                    <SearchBar />
-                </div>
-                <div id="favoritesDisplay">
-                    <div className="unauthWarning">
-                        NOT SIGNED IN
-                        <br />
-                        FAVORITES WILL BE LOST ON EXIT
+        <header>
+            <div className="outerContainer">
+                <div className="row1">
+                    <HeaderTitle title="VGChords" subtitle="Video Game Music Chord Compendium" />
+                    <div>
+                        <SearchBar />
                     </div>
-                    <Button className="favoritesButton" style={{ float: 'right' }}>
-                        0
-                        <div className="horizSpace" />
-                        <i className="fas fa-heart" />
-                    </Button>
+                    <div id="favoritesDisplay">
+                        <div className="unauthWarning">
+                            NOT SIGNED IN
+                            <br />
+                            FAVORITES WILL BE LOST ON EXIT
+                        </div>
+                        <Button className="favoritesButton" style={{ float: 'right' }}>
+                            0
+                            <div className="horizSpace" />
+                            <i className="fas fa-heart" />
+                        </Button>
+                    </div>
                 </div>
+                <HeaderNav>{children}</HeaderNav>
             </div>
-            <HeaderNav>{children}</HeaderNav>
-        </div>
+        </header>
     </section>
 )
