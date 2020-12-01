@@ -38,14 +38,20 @@ const GlobalDecoration: React.FC = () => (
     </div>
 )
 
-export const Layout: React.FC<{ pageTitle: PageTitle; children: any }> = ({ pageTitle, children }) => {
+type LayoutType = {
+    pageTitle: PageTitle
+
+    /** Page content. Goes in section#content. */
+    children: any
+}
+
+/** @param children Page content. Goes in section#content. */
+export const Layout: React.FC<LayoutType> = ({ pageTitle, children }) => {
     return (
-        <div id="global">
+        <div id="layout">
             <GlobalDecoration />
             <Header>{pageTitle === 'Browse Music' ? <BrowseMusicTitle /> : <WipTitle />}</Header>
-            <section id="content">
-                <div className="container">Hi</div>
-            </section>
+            <section id="content">{children}</section>
             <Footer />
         </div>
     )

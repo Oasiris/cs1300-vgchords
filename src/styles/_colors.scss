@@ -3,6 +3,7 @@ $globalText: #252727;
 $globalBack: white;
 
 $dark07: rgba($globalText, 0.07);
+$dark20Opaque: lighten($globalText, 73);
 $dark80: rgba($globalText, 0.8);
 
 // $radialBack: radial-gradient(farthest-corner at 65vw 35vh, #fbfcfd 0%, #fbfcfd 20%, #f2f5f5 100%);
@@ -11,7 +12,10 @@ $radialBack: radial-gradient(farthest-corner at 65vw 35vh, #fbfcfd 0%, #fbfcfd 2
 $darkButtonText: white;
 $darkButtonBack: $globalText;
 // $darkButtonBackHover: rgb(62, 67, 68);
-$darkButtonBackHover: rgb(73, 78, 80);
+// $darkButtonBackHover: rgb(73, 78, 80);
+$darkButtonBackHover: rgb(74, 83, 87);
 // $darkButtonBackActive: #777;
 
 $flourishBack: rgba(#a0a8b9, 0.35);
+$mediumFlourishBack: rgba(#a0a8b9, 0.24);
+$searchFlourishBack: rgba(#222, 0.06);

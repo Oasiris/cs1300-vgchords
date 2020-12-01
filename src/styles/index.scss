@@ -9,7 +9,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    font-size: 14.5px;
+    font-size: 15px;
     line-height: 1.5;
     letter-spacing: -0.012em;
 
@@ -49,6 +49,7 @@ section#header {
 
 section#content {
     min-height: calc(100vh - 182px - 106px);
+    box-sizing: content-box;
 }
 
 // Height: 106px
@@ -118,7 +119,8 @@ section#footer {
             position: absolute;
             background: $flourishBack;
             width: 9px;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
             padding-right: 3px;
         }
         & > div:last-child {
@@ -126,7 +128,8 @@ section#footer {
             left: 12px;
             background: $flourishBack;
             width: 4px;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
         }
     }
     & > div:last-child {
@@ -135,7 +138,8 @@ section#footer {
             right: 0px;
             background: $flourishBack;
             width: 9px;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
             padding-right: 3px;
         }
         & > div:last-child {
@@ -143,7 +147,8 @@ section#footer {
             right: 12px;
             background: $flourishBack;
             width: 4px;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
         }
     }
 }
@@ -278,4 +283,86 @@ section#header .row1 {
 
 .rackButton {
     z-index: 90;
+}
+
+/* ————————————————————————— */
+/* Search */
+
+#primarySearchContainer {
+    position: relative;
+    background: white;
+    box-shadow: 0 1px 7px rgba(black, 0.18);
+
+    input:first-child {
+        position: relative;
+        z-index: 100;
+        min-width: 330px;
+
+        background: none;
+        border: 0px;
+
+        padding: 15px 20px 15px 30px;
+        font-size: 16px;
+
+        color: $dark80;
+
+        &::placeholder {
+            color: #999999;
+            letter-spacing: 0.005em;
+        }
+    }
+
+    ._leftFlourish {
+        div:first-child {
+            z-index: 20;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 9px;
+            background: $searchFlourishBack;
+        }
+        div:last-child {
+            z-index: 20;
+            position: absolute;
+            top: 0;
+            left: 12px;
+            height: 100%;
+            width: 4px;
+            background: $searchFlourishBack;
+        }
+    }
+
+    ._extraBox {
+        z-index: 20;
+        position: absolute;
+        // top: 1.25px;
+        top: 2px;
+        left: 2px;
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+        border: 0.75px solid $mediumFlourishBack;
+        box-sizing: border-box;
+    }
+
+    ._searchButton {
+        z-index: 120;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 0;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2.5px;
+
+        &:hover:not(:active) {
+            background: $dark20Opaque;
+        }
+        &:active {
+            background: $globalText;
+            color: white;
+        }
+    }
 }
