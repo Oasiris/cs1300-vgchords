@@ -352,6 +352,7 @@ class Table extends React.Component<TableProps> {
 type BrowseListState = {
     sorts: string[][]
     filters: Dictionary<string, string[]>
+    changed: boolean
     openModal: string | null
 
     /** T001: false, T002: true, and so on. */
@@ -363,6 +364,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         /** Ordered from highest to lowest priority. */
         sorts: [],
         filters: {},
+        changed: false,
         openModal: null,
         favoriteIds: {},
     }
@@ -392,16 +394,17 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
             const currentSortIdx = fp.findIndex((val) => val[0] === labelName, prevState.sorts)
             if (currentSortIdx === -1) {
                 return {
+                    changed: true,
                     sorts: [[labelName, 'asc']].concat(prevState.sorts),
                 }
             } else if (prevState.sorts[currentSortIdx][1] === 'asc') {
                 // Splice out currentSort, then add descending sort.
                 prevState.sorts.splice(currentSortIdx, 1)
-                return { sorts: [[labelName, 'desc']].concat(prevState.sorts) }
+                return { changed: true, sorts: [[labelName, 'desc']].concat(prevState.sorts) }
             } else {
                 // Splice out currentSort.
                 prevState.sorts.splice(currentSortIdx, 1)
-                return { sorts: prevState.sorts }
+                return { changed: true, sorts: prevState.sorts }
             }
         })
     }
@@ -425,6 +428,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
             }
 
             return {
+                changed: true,
                 filters: prevState.filters,
             }
         })
@@ -435,9 +439,19 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         this.setState((prevState) => {
             prevState.filters[labelName] = []
             return {
+                changed: true,
                 filters: prevState.filters,
             }
         })
+    }
+
+    /** NOTE: Does not clear favorites. */
+    handleClearChanges = () => {
+        this.setState(() => ({
+            sorts: [],
+            filters: {},
+            changed: false,
+        }))
     }
 
     handleToggleFavorite = (trackId: string) => {
@@ -504,7 +518,12 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                 <div className="container">
                     <div style={{ height: '12.5px' }} />
                     <span>To filter or sort, hover over the table heading.</span>
-                    <div style={{ height: '12.5px' }} />
+                    {this.state.changed ? (
+                        <MinorButton onClick={this.handleClearChanges}>Clear changes</MinorButton>
+                    ) : (
+                        <div style={{ height: '40px' }} />
+                    )}
+                    <div style={{ height: '7.5px' }} />
                     <Table
                         tracklist={tracklist}
                         getSortStatus={this.getSortStatusForLabel}
