@@ -17,11 +17,11 @@ export const Footer: React.FC = () => (
         <footer>
             <div className="outerContainer">
                 <FooterNav />
-                {/* TODO: Make About, Help, & Legal pages */}
+                {/* These don't lead anywhere for now */}
                 <div className="footerNavBar">
-                    <a>About</a>
-                    <a>Help</a>
-                    <a>Legal</a>
+                    <a href="/">About</a>
+                    <a href="/">Help</a>
+                    <a href="/">Legal</a>
                 </div>
             </div>
         </footer>

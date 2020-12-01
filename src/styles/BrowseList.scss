@@ -45,6 +45,7 @@ div#trackTable {
 
     ._headRowItem._sortable {
         ._sortButton {
+            cursor: pointer;
             color: $dark40;
             font-size: 16px;
             padding: 0 2.5px;
@@ -70,6 +71,7 @@ div#trackTable {
 
     ._headRowItem._filterable {
         ._filterButton {
+            cursor: pointer;
             color: $dark40;
             font-size: 16px;
             padding: 0 2.5px;

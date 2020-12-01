@@ -10,17 +10,11 @@ import { HexButton as Button } from '../components/Button'
 import { ALL_THUMBS, ALL_TRACKS } from '../data/games'
 
 import '../styles/Favorites.scss'
-// import { SearchBar } from '../components/SearchBar'
 
 const HeaderNav: React.FC<{ children?: any }> = ({ children }) => (
     <div className="lineNavWrapper">
         <div className="boldLineRack" />
         <div className="lineRackTitle">{children}</div>
-        {/* <Button className="navRightButton rackButton">
-            <i className="fas fa-caret-right" />
-            <div className="horizSpace" />
-            SIGN IN
-        </Button> */}
     </div>
 )
 
@@ -105,7 +99,6 @@ export const Header: React.FC<HeaderProps> = ({ favoriteIds, children }) => {
                                     const entry = ALL_TRACKS.find((track) => track.id === id)
                                     const thumbEntry = ALL_THUMBS.find((track) => track.name === entry!.game.name)
 
-                                    // console.log('thumbEntry:', thumbEntry)
                                     return (
                                         <div key={id}>
                                             <div className="thumbWrapper">

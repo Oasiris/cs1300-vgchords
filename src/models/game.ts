@@ -1,3 +1,4 @@
+/** Models games, which each contain tracks. */
 export type Game = {
     type: 'game'
 
@@ -12,6 +13,7 @@ export type Game = {
 
 export type GameR = Game & { tracks: Track[] }
 
+/** Models tracks, which each belong to a game. */
 export type Track = {
     id: string
     name: string

@@ -5,34 +5,13 @@ import { Modal } from '@material-ui/core'
 import fp from 'lodash/fp'
 
 import { Dictionary } from '../models/common'
-import { Game, GameR, Thumb, Track, TrackR } from '../models/game'
+import { TrackR } from '../models/game'
 import { getMinSec } from '../utils/util'
 
-import { HexButton } from '../components/Button'
 import { Layout } from '../components/Layout'
 import { ALL_TRACKS, GAME_TO_THUMB } from '../data/games'
 
 import '../styles/BrowseList.scss'
-// import moment from 'moment'
-
-// const ALL_GAMERS = data as GameR[]
-
-// const GAME_TO_TRACKS: Dictionary<string, TrackR[]> = {}
-// ALL_GAMERS.forEach(({ tracks, ...props }) => {
-//     const game = props
-//     const trackRs = tracks.map((track) => ({ ...track, game }))
-//     GAME_TO_TRACKS[props.name] = trackRs
-// })
-
-// /** Master data for the website. */
-// const ALL_TRACKS: TrackR[] = fp.unnest(Object.values(GAME_TO_TRACKS)) as TrackR[]
-
-// // Add thumbnail data.
-// const ALL_THUMBS = thumbData as ({ name: string } & Thumb)[]
-// const GAME_TO_THUMB: Dictionary<string, { thumb: string }> = {}
-// ALL_THUMBS.forEach(({ name, thumb }) => {
-//     GAME_TO_THUMB[name] = { thumb }
-// })
 
 /** Table item thumbnail. Enlarges image on mouseover. */
 const TableThumb: React.FC<{ track: TrackR }> = ({ track }) => {
@@ -135,16 +114,6 @@ const labels = [
         hideable: true,
         flex: '0 0 84px',
     },
-    // {
-    //     label: 'Upload date',
-    //     name: 'Upload date',
-    //     getField: (track: TrackR) => track.createdAt,
-    //     getDisplay: (track: TrackR) => moment(track.createdAt).fromNow(),
-    //     sortable: true,
-    //     filterType: 'none',
-    //     hideable: true,
-    //     flex: '0 0 101px',
-    // },
     {
         label: 'Length',
         name: 'Track length',
@@ -512,8 +481,6 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                         getSortStatus={this.getSortStatusForLabel}
                         getActiveFilterItems={this.getActiveFilterItemsForLabel}
                         getIsFavorite={this.getIsFavorite}
-                        // sorts={this.state.sorts}
-                        // filters={this.state.filters}
                         handleClickSort={this.handleClickSort}
                         handleChangeFilter={this.handleChangeFilter}
                         handleToggleFavorite={this.handleToggleFavorite}

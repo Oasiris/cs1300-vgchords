@@ -62,5 +62,8 @@ module.exports = {
         'named-imports-order': 'lowercase-first',
       },
     ],
+
+    // Allow JSX lambdas despite unperformance.
+    'jsx-no-lambda': false,
   },
 }

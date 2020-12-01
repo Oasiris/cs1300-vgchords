@@ -29,6 +29,8 @@
     }
 
     .backButton {
+        cursor: pointer;
+
         & > div {
             position: absolute;
             top: 40px;
