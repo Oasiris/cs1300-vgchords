@@ -25,55 +25,67 @@ const ALL_TRACKS: TrackR[] = fp.unnest(Object.values(GAME_TO_TRACKS)) as TrackR[
 
 const labels = [
     {
-        name: '',
+        label: '',
+        name: 'Album Art',
         getField: (track: TrackR) => '',
         getDisplay: (track: TrackR) => <div className="albumArtPlaceholder" />,
         sortable: false,
-        isLocked: true,
+        filterType: 'none',
+        hideable: true,
         flex: '0 0 65px',
     },
     {
+        label: 'Game',
         name: 'Game',
         getField: (track: TrackR) => track.game.name,
         getDisplay: (track: TrackR) => track.game.name,
         sortable: true,
-        isLocked: true,
+        filterType: 'many',
+        hideable: false,
         flex: '5 1 0',
     },
     {
-        name: 'Track',
+        label: 'Track',
+        name: 'Track name',
         getField: (track: TrackR) => track.name,
         getDisplay: (track: TrackR) => track.name,
         sortable: true,
-        isLocked: true,
+        filterType: 'too many',
+        hideable: false,
         flex: '7 1 0',
     },
     {
-        name: 'Artist/Composer(s)',
+        label: 'Artist/Composer(s)',
+        name: 'Artist(s)',
         getField: (track: TrackR) => track.artists || track.game.artists,
         getDisplay: (track: TrackR) => (track.artists ? track.artists.join(', ') : track.game.artists.join(', ')),
         sortable: false,
-        isLocked: true,
+        filterType: 'many',
+        hideable: true,
         flex: '4 1 0',
     },
     {
-        name: 'Year',
+        label: 'Year',
+        name: 'Release year',
         getField: (track: TrackR) => track.game.releaseYear,
         getDisplay: (track: TrackR) => track.game.releaseYear,
         sortable: true,
-        isLocked: true,
-        flex: '0 0 50px',
+        filterType: 'range',
+        hideable: true,
+        flex: '0 0 85px',
     },
     {
+        label: 'Upload date',
         name: 'Upload date',
         getField: (track: TrackR) => track.createdAt,
         getDisplay: (track: TrackR) => moment(track.createdAt).fromNow(),
         sortable: true,
-        isLocked: true,
+        filterType: 'range',
+        hideable: true,
         flex: '2 1 0',
     },
     {
-        name: '',
+        label: '',
         getField: (track: TrackR) => '',
         getDisplay: (track: TrackR) => (
             <div className="_favoriteButton">
@@ -81,7 +93,8 @@ const labels = [
             </div>
         ),
         sortable: false,
-        isLocked: true,
+        filterType: 'none',
+        hideable: true,
         flex: '1 1 0',
     },
 ]
@@ -93,8 +106,32 @@ class Table extends React.Component {
                 <div className="_head">
                     <div className="_headRow unselectable">
                         {labels.map((cell, idx) => (
-                            <div key={idx} className="_headRowItem" style={{ flex: cell.flex }}>
-                                {cell.name}
+                            <div
+                                key={idx}
+                                className={`_headRowItem ${cell.sortable ? '_sortable' : ''} ${
+                                    cell.filterType !== 'none' ? '_filterable' : ''
+                                }`}
+                                style={{ flex: cell.flex }}
+                            >
+                                {cell.label}
+
+                                {cell.sortable && (
+                                    <>
+                                        <div className="horizSpace" />
+                                        <div className="_sortButton">
+                                            <i className="fas fa-arrow-down" />
+                                        </div>
+                                    </>
+                                )}
+
+                                {cell.filterType !== 'none' && (
+                                    <>
+                                        <div className="horizSpace" />
+                                        <div className="_filterButton">
+                                            <i className="fas fa-filter" />
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -102,19 +139,6 @@ class Table extends React.Component {
                 <div className="_body">
                     {ALL_TRACKS.map((track, idx) => (
                         <div className="_bodyRow" key={idx}>
-                            {/* <div className="_bodyRowItem">
-                                <div className="albumArtPlaceholder" />
-                            </div>
-                            <div className="_bodyRowItem">{track.game.name}</div>
-                            <div className="_bodyRowItem">{track.name}</div>
-                            <div className="_bodyRowItem">
-                                {track.artists ? track.artists.join(', ') : track.game.artists.join(', ')}
-                            </div>
-                            <div className="_bodyRowItem">{track.game.releaseYear}</div>
-                            <div className="_bodyRowItem">{moment(track.createdAt).fromNow()}</div>
-                            <div className="_bodyRowItem _favoriteButton">
-                                <i className="far fa-heart" />
-                            </div> */}
                             {labels.map((cell, labelIdx) => (
                                 <div
                                     key={labelIdx}

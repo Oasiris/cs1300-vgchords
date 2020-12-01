@@ -1,7 +1,7 @@
 @import 'colors';
 
 .albumArtPlaceholder {
-    background: #ccc;
+    background: rgba($globalText, 0.1);
     width: 59px;
     height: 59px;
 }
@@ -22,9 +22,8 @@ div#trackTable {
     ._head {
         display: flex;
         flex: 0 0 auto;
-        height: 46px;
         color: black;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 2px solid rgba($globalText, 0.15);
         padding: 0 5px;
         font-size: 14px;
         font-weight: 500;
@@ -38,9 +37,34 @@ div#trackTable {
     ._headRowItem {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 10px 15px 10px 0;
+        justify-content: normal;
+        height: 46px;
+        padding: 0 7.5px 0 7.5px;
         color: $dark50;
+    }
+    ._headRowItem._sortable {
+        ._sortButton {
+            font-size: 16px;
+            padding: 0 2.5px;
+            opacity: 0;
+        }
+        &:hover {
+            ._sortButton {
+                opacity: 1;
+            }
+        }
+    }
+    ._headRowItem._filterable {
+        ._filterButton {
+            font-size: 16px;
+            padding: 0 2.5px;
+            opacity: 0;
+        }
+        &:hover {
+            ._filterButton {
+                opacity: 1;
+            }
+        }
     }
 
     ._body {
@@ -63,7 +87,7 @@ div#trackTable {
         height: 59px;
         align-items: center;
         justify-content: flex-start;
-        padding: 0 15px 0 0;
+        padding: 0 7.5px 0 7.5px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;

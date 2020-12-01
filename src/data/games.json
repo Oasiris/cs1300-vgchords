@@ -23,6 +23,8 @@
     "tracks": [
       {
         "name": "Rotten Vale Battle Theme",
+        "altNames": ["Murmurs from the Land Forbidden"],
+        "artists": ["Akihiko Narita"],
         "lengthSec": 134,
         "createdAt": "2020-12-01"
       }
@@ -33,27 +35,31 @@
     "name": "Pokemon G/S/C",
     "releaseYear": 1999,
     "altNames": ["Pokemon GSC", "Pokemon Gold and Silver Versions"],
-    "artists": ["?", "?"],
+    "artists": ["Junichi Masuda", "Go Ichinose", "Morikazu Aoki"],
     "tracks": [
       {
         "name": "Goldenrod Game Corner",
+        "artists": ["Go Ichinose"],
         "lengthSec": 60,
         "createdAt": "2020-12-01"
       },
       {
         "name": "Ecruteak City",
         "altNames": ["Cianwood City"],
+        "artists": ["Go Ichinose"],
         "lengthSec": 66,
         "createdAt": "2020-12-01"
       },
       {
         "name": "Azalea Town",
         "altNames": ["Blackthorn City"],
+        "artists": ["Go Ichinose"],
         "lengthSec": 52,
         "createdAt": "2020-12-01"
       },
       {
         "name": "National Park",
+        "artists": ["Go Ichinose"],
         "lengthSec": 66,
         "createdAt": "2020-12-01"
       }
