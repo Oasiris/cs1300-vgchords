@@ -11,12 +11,12 @@ body {
 
     font-size: 15px;
     line-height: 1.5;
-    letter-spacing: -0.012em;
+    letter-spacing: -0.007em;
 
     color: $globalText;
-    // background: $radialBack;
+    background: $radialBack;
 
-    height: 100vh;
+    min-height: 100vh;
 }
 
 code {
@@ -54,6 +54,7 @@ section#content {
 
 // Height: 106px
 section#footer {
+    position: relative;
     // position: absolute;
     width: 100%;
     bottom: 0;
@@ -112,15 +113,67 @@ section#footer {
     }
 }
 
+.linkButton {
+    display: inline-flex;
+    cursor: pointer;
+
+    & > div {
+        transition: border-color 0.1s, background 0.1s;
+    }
+
+    & > div:nth-child(1) {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 15px 9px 15px 0;
+        border-color: transparent $minorButtonBack transparent transparent;
+    }
+
+    & > div:nth-child(2) {
+        font-size: 14.25px;
+        min-width: 205px;
+        line-height: 1;
+        letter-spacing: 0.006em;
+        padding: 3.5px 20px;
+        background: $minorButtonBack;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    & > div:nth-child(3) {
+        // http://apps.eky.hk/css-triangle-generator/
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 15px 0 15px 9px;
+        border-color: transparent transparent transparent $minorButtonBack;
+    }
+
+    padding-top: 9px;
+
+    &:hover:not(:active) {
+        & > div:nth-child(1) {
+            border-color: transparent $minorButtonBackHover transparent transparent;
+        }
+        & > div:nth-child(2) {
+            background: $minorButtonBackHover;
+        }
+        & > div:nth-child(3) {
+            border-color: transparent transparent transparent $minorButtonBackHover;
+        }
+    }
+}
+
 #globalDecoration {
-    position: relative;
+    height: inherit;
     & > div:first-child {
         & > div:first-child {
             position: absolute;
             background: $flourishBack;
             width: 9px;
-            height: 100%;
             min-height: 100vh;
+            height: 100%;
             padding-right: 3px;
         }
         & > div:last-child {
@@ -128,8 +181,8 @@ section#footer {
             left: 12px;
             background: $flourishBack;
             width: 4px;
-            height: 100%;
             min-height: 100vh;
+            height: 100%;
         }
     }
     & > div:last-child {
@@ -296,12 +349,12 @@ section#header .row1 {
     input:first-child {
         position: relative;
         z-index: 100;
-        min-width: 330px;
+        min-width: 280px;
 
         background: none;
         border: 0px;
 
-        padding: 15px 20px 15px 30px;
+        padding: 15px 54px 15px 32px;
         font-size: 16px;
 
         color: $dark80;
@@ -309,6 +362,11 @@ section#header .row1 {
         &::placeholder {
             color: #999999;
             letter-spacing: 0.005em;
+        }
+
+        transition: background 0.05s;
+        &:hover:not(:active):not(:focus) {
+            background: $searchBackHover;
         }
     }
 

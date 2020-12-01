@@ -9,3 +9,14 @@
     padding-bottom: 25px;
     // text-align: center;
 }
+
+#pickCategoryGrid {
+    display: grid;
+    grid-template-columns: auto 120px auto;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
