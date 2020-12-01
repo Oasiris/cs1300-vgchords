@@ -115,3 +115,63 @@ div#trackTable {
         color: $dark50;
     }
 }
+
+// —————————————————
+// Modal
+
+.modalWrapper {
+    // color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:focus {
+        outline: none;
+    }
+
+    .modalBase {
+        position: relative;
+
+        background: white;
+        padding: 60px 45px;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 450px;
+        width: 35%;
+        min-height: 55%;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    span._category {
+        font-size: 14.75px;
+        font-weight: 500px;
+        margin-bottom: 17.5px;
+    }
+
+    ._tagList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        & > div {
+            cursor: pointer;
+            background: $dark07;
+            color: $dark80;
+            font-size: 13.5px;
+            border-radius: 3px;
+            font-weight: 500;
+            padding: 2.5px 10px;
+            display: inline-flex;
+            margin: 3px;
+
+            &:hover:not(:active) {
+                background: $dark20Opaque;
+            }
+        }
+    }
+}

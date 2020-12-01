@@ -7,7 +7,7 @@ export type Game = {
 
     artists: string[]
     releaseYear: number
-    franchises: string[]
+    franchise?: string
 }
 
 export type GameR = Game & { tracks: Track[] }

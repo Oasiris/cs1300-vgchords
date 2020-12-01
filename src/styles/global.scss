@@ -10,7 +10,13 @@
 
 .container {
     margin: 0 auto;
-    width: calc(97.5vw - 205px);
+    width: calc(95vw - 205px);
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: calc(95vw - 205px);
+    }
 }
 
 @media (min-width: 1600px) {

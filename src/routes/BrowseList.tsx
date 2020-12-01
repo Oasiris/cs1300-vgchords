@@ -3,7 +3,7 @@ import React from 'react'
 import { Modal } from '@material-ui/core'
 
 import fp from 'lodash/fp'
-import moment from 'moment'
+// import moment from 'moment'
 
 import { Dictionary } from '../models/common'
 import { Game, GameR, Track, TrackR } from '../models/game'
@@ -43,7 +43,8 @@ const labels = [
         getField: (track: TrackR) => track.game.name,
         getDisplay: (track: TrackR) => track.game.name,
         sortable: true,
-        filterType: 'many',
+        filterType: 'many-to-one',
+        filterOptions: fp.uniq(ALL_TRACKS.map((track) => track.game.name)),
         hideable: false,
         flex: '5 1 0',
     },
@@ -53,7 +54,7 @@ const labels = [
         getField: (track: TrackR) => track.name,
         getDisplay: (track: TrackR) => track.name,
         sortable: true,
-        filterType: 'too many',
+        filterType: 'none',
         hideable: false,
         flex: '7 1 0',
     },
@@ -63,7 +64,10 @@ const labels = [
         getField: (track: TrackR) => track.artists || track.game.artists,
         getDisplay: (track: TrackR) => (track.artists ? track.artists.join(', ') : track.game.artists.join(', ')),
         sortable: false,
-        filterType: 'many',
+        filterType: 'many-to-many',
+        filterOptions: fp.uniq(
+            ALL_TRACKS.map((track) => track.artists || track.game.artists).reduce((acc, cur) => acc.concat(cur)),
+        ),
         hideable: true,
         flex: '4 1 0',
     },
@@ -73,19 +77,30 @@ const labels = [
         getField: (track: TrackR) => track.game.releaseYear,
         getDisplay: (track: TrackR) => track.game.releaseYear,
         sortable: true,
-        filterType: 'range',
+        filterType: 'none',
         hideable: true,
         flex: '0 0 84px',
     },
+    // {
+    //     label: 'Upload date',
+    //     name: 'Upload date',
+    //     getField: (track: TrackR) => track.createdAt,
+    //     getDisplay: (track: TrackR) => moment(track.createdAt).fromNow(),
+    //     sortable: true,
+    //     filterType: 'none',
+    //     hideable: true,
+    //     flex: '0 0 101px',
+    // },
     {
-        label: 'Upload date',
-        name: 'Upload date',
-        getField: (track: TrackR) => track.createdAt,
-        getDisplay: (track: TrackR) => moment(track.createdAt).fromNow(),
+        label: 'Length',
+        name: 'Track length',
+        getField: (track: TrackR) => track.lengthSec,
+        getDisplay: (track: TrackR) =>
+            `${Math.floor(track.lengthSec / 60)}:${String(track.lengthSec % 60).padStart(2, '0')}`,
         sortable: true,
-        filterType: 'range',
+        filterType: 'none',
         hideable: true,
-        flex: '0 0 101px',
+        flex: '0 0 71px',
     },
     {
         label: '',
@@ -142,6 +157,11 @@ const FilterButton: React.FC<{
     handleChangeFilter: any
 }> = ({ labelName, filterStatus, isModalOpen, handleOpenModal, handleCloseModal, handleChangeFilter }) => {
     const handleOpen = () => handleOpenModal(labelName)
+
+    const labelEntry = fp.find((val) => val.name === labelName, labels)
+    const enabledFilters = filterStatus
+    const disabledFilters = fp.difference(labelEntry!.filterOptions!, filterStatus)
+
     return (
         <>
             <div className="_filterButton" onClick={handleOpen}>
@@ -152,8 +172,36 @@ const FilterButton: React.FC<{
                 onClose={handleCloseModal}
                 aria-labelledby="select filter modal"
                 aria-describedby={`selects filter for ${labelName}`}
+                className="modalWrapper"
             >
-                <div>hi</div>
+                <div className="modalBase">
+                    <span className="_category">Active</span>
+                    <div className="_tagList">
+                        {enabledFilters.map((filterItem) => (
+                            <div
+                                className="_filterTag"
+                                key={filterItem}
+                                onClick={() => handleChangeFilter(labelName, filterItem, false)}
+                            >
+                                {filterItem}
+                            </div>
+                        ))}
+                    </div>
+                    <div style={{ height: '27.5px' }} />
+                    <span className="_category">Inactive</span>
+                    <div className="_tagList">
+                        {disabledFilters.map((filterItem) => (
+                            <div
+                                className="_filterTag"
+                                key={filterItem}
+                                onClick={() => handleChangeFilter(labelName, filterItem, true)}
+                            >
+                                {filterItem}
+                            </div>
+                        ))}
+                    </div>
+                    <div />
+                </div>
             </Modal>
         </>
     )
@@ -310,8 +358,27 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         })
     }
 
-    handleChangeFilter = (labelName: string, selected: string[]) => {
+    handleChangeFilter = (labelName: string, filterItem: string, toggle: boolean) => {
         // TODO
+        this.setState((prevState) => {
+            // Prepare.
+            if (prevState.filters[labelName] === undefined) {
+                prevState.filters[labelName] = []
+            }
+            if (toggle === true) {
+                prevState.filters[labelName]!.push(filterItem)
+                prevState.filters[labelName] = fp.uniq(prevState.filters[labelName])
+            } else {
+                const itemIdx = prevState.filters[labelName]!.findIndex((val) => val === filterItem)
+                if (itemIdx !== -1) {
+                    prevState.filters[labelName]!.splice(itemIdx, 1)
+                }
+            }
+
+            return {
+                filters: prevState.filters,
+            }
+        })
     }
 
     handleOpenModal = (labelName: string) => {
@@ -324,7 +391,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
 
     render() {
         // Sort and filter tracks.
-        const tracklist = Array(...ALL_TRACKS)
+        let tracklist = Array(...ALL_TRACKS)
         console.log({ sorts: this.state.sorts, filters: this.state.filters })
 
         for (const [labelName, sortDirection] of this.state.sorts.reverse()) {
@@ -343,6 +410,24 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                         return 0
                     }
                 })
+            }
+        }
+
+        for (const [labelName, filterItems] of Object.entries(this.state.filters)) {
+            if (filterItems === undefined || filterItems.length === 0) {
+                continue
+            }
+
+            const labelEntry = fp.find((val) => val.name === labelName, labels)
+            if (labelEntry!.filterType === 'many-to-many') {
+                // Many-to-many tag filtering.
+                tracklist = tracklist.filter((track) => {
+                    const many = (labelEntry!.getField(track) as unknown) as string[]
+                    return many.some((field) => filterItems.includes(field))
+                })
+            } else {
+                // Many-to-one tag filtering.
+                tracklist = tracklist.filter((track) => filterItems.includes(labelEntry!.getField(track) as string))
             }
         }
 

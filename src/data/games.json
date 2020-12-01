@@ -4,7 +4,7 @@
     "name": "Pokemon TCG 2",
     "artists": ["Ichiro Shimakura"],
     "releaseYear": 2001,
-    "franchises": ["Pokemon", "Nintendo"],
+    "franchise": "Pokemon",
     "tracks": [
       {
         "name": "Great Rocket Battle",
@@ -19,7 +19,7 @@
     "name": "Monster Hunter: World",
     "artists": ["?"],
     "releaseYear": 2017,
-    "franchises": ["Monster Hunter"],
+    "franchise": "Monster Hunter",
     "tracks": [
       {
         "name": "Rotten Vale Battle Theme",
@@ -36,6 +36,7 @@
     "releaseYear": 1999,
     "altNames": ["Pokemon GSC", "Pokemon Gold and Silver Versions"],
     "artists": ["Junichi Masuda", "Go Ichinose", "Morikazu Aoki"],
+    "franchise": "Pokemon",
     "tracks": [
       {
         "name": "Goldenrod Game Corner",
@@ -83,7 +84,7 @@
     "type": "game",
     "name": "Kingdom Hearts",
     "releaseYear": 2002,
-    "franchises": ["Kingdom Hearts"],
+    "franchise": "Kingdom Hearts",
     "artists": ["Yoko Shimomura"],
     "tracks": [
       {
@@ -104,7 +105,7 @@
     "name": "Kingdom Hearts 2",
     "releaseYear": 2004,
     "altNames": ["Kingdom Hearts II"],
-    "franchises": ["Kingdom Hearts"],
+    "franchise": "Kingdom Hearts",
     "artists": ["Yoko Shimomura"],
     "tracks": [
       {
@@ -125,7 +126,7 @@
     "name": "Super Mario RPG",
     "releaseYear": 1996,
     "subtitle": "Legend of the Seven Stars",
-    "franchises": ["Mario", "Mario & Luigi"],
+    "franchise": "Mario",
     "artists": ["Yoko Shimomura"],
     "tracks": [
       {
@@ -140,7 +141,7 @@
     "name": "Final Fantasy XIII",
     "releaseYear": 2009,
     "altNames": ["Final Fantasy 13"],
-    "franchises": ["Final Fantasy"],
+    "franchise": "Final Fantasy",
     "artists": ["Masashi Hamauzu"],
     "tracks": [
       {
@@ -155,7 +156,7 @@
     "name": "Final Fantasy VII Remake",
     "releaseYear": 2020,
     "altNames": ["Final Fantasy 7 Remake"],
-    "franchises": ["Final Fantasy"],
+    "franchise": "Final Fantasy",
     "artists": ["Nobuo Uematsu", "Masashi Hamauzu", "Mitsuto Suzuki", "Shotaro Shima"],
     "tracks": [
       {
@@ -172,7 +173,7 @@
     "name": "Fire Emblem: Three Houses",
     "releaseYear": 2019,
     "altNames": ["Fire Emblem 16"],
-    "franchises": ["Fire Emblem"],
+    "franchise": "Fire Emblem",
     "artists": ["Takeru Kanazaki", "Hiroki Morishita", "Rei Kondoh"],
     "tracks": [
       {
@@ -188,7 +189,7 @@
     "name": "NieR:Automata",
     "releaseYear": 2017,
     "altNames": ["Nier Automata", "Nier: Automata"],
-    "franchises": ["Nier"],
+    "franchise": "Nier",
     "artists": ["Keiichi Okabe", "Keigo Hoashi", "Kuniyuki Takahashi", "Kakeru Ishihama"],
     "tracks": [
       {
@@ -204,7 +205,7 @@
     "name": "Wipeout 3",
     "altNames": "wip3out",
     "releaseYear": 1999,
-    "franchises": ["Wipeout"],
+    "franchise": "Wipeout",
     "artists": [],
     "tracks": [
       {
@@ -219,7 +220,6 @@
     "type": "game",
     "name": "Minecraft",
     "releaseYear": 2011,
-    "franchises": [],
     "artists": ["C418", "Lena Raine"],
     "tracks": [
       {
