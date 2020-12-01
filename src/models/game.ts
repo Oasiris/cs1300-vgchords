@@ -13,6 +13,7 @@ export type Game = {
 export type GameR = Game & { tracks: Track[] }
 
 export type Track = {
+    id: string
     name: string
     subtitle?: string
     altNames?: string[]

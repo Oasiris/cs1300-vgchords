@@ -7,6 +7,7 @@
     "franchise": "Pokemon",
     "tracks": [
       {
+        "id": "T001",
         "name": "Great Rocket Battle",
         "altNames": ["Team GR Battle"],
         "lengthSec": 144,
@@ -22,6 +23,7 @@
     "franchise": "Monster Hunter",
     "tracks": [
       {
+        "id": "T002",
         "name": "Rotten Vale Battle Theme",
         "altNames": ["Murmurs from the Land Forbidden"],
         "artists": ["Akihiko Narita"],
@@ -39,12 +41,14 @@
     "franchise": "Pokemon",
     "tracks": [
       {
+        "id": "T003",
         "name": "Goldenrod Game Corner",
         "artists": ["Go Ichinose"],
         "lengthSec": 60,
         "createdAt": "2020-12-01"
       },
       {
+        "id": "T004",
         "name": "Ecruteak City",
         "altNames": ["Cianwood City"],
         "artists": ["Go Ichinose"],
@@ -52,6 +56,7 @@
         "createdAt": "2020-12-01"
       },
       {
+        "id": "T005",
         "name": "Azalea Town",
         "altNames": ["Blackthorn City"],
         "artists": ["Go Ichinose"],
@@ -59,6 +64,7 @@
         "createdAt": "2020-12-01"
       },
       {
+        "id": "T006",
         "name": "National Park",
         "artists": ["Go Ichinose"],
         "lengthSec": 66,
@@ -73,6 +79,7 @@
     "artists": ["Michiru Yamane"],
     "tracks": [
       {
+        "id": "T007",
         "name": "In A Moment's Time",
         "parentheses": "Ending Theme",
         "lengthSec": 269,
@@ -88,12 +95,14 @@
     "artists": ["Yoko Shimomura"],
     "tracks": [
       {
+        "id": "T008",
         "name": "Hand in Hand",
         "altNames": ["Traverse Town Battle Theme"],
         "lengthSec": 70,
         "createdAt": "2020-11-21"
       },
       {
+        "id": "T009",
         "name": "Traverse Town",
         "lengthSec": 34,
         "createdAt": "2020-11-21"
@@ -109,12 +118,14 @@
     "artists": ["Yoko Shimomura"],
     "tracks": [
       {
+        "id": "T010",
         "name": "Roxas's Theme",
         "altNames": ["Roxas"],
         "lengthSec": 50,
         "createdAt": "2020-11-21"
       },
       {
+        "id": "T011",
         "name": "Twilight Town",
         "lengthSec": 85,
         "createdAt": "2020-11-21"
@@ -130,6 +141,7 @@
     "artists": ["Yoko Shimomura"],
     "tracks": [
       {
+        "id": "T012",
         "name": "Beware the Forest's Mushrooms",
         "lengthSec": 55,
         "createdAt": "2020-12-02"
@@ -145,6 +157,7 @@
     "artists": ["Masashi Hamauzu"],
     "tracks": [
       {
+        "id": "T013",
         "name": "Lightning's Theme",
         "lengthSec": 143,
         "createdAt": "2020-11-17"
@@ -160,6 +173,7 @@
     "artists": ["Nobuo Uematsu", "Masashi Hamauzu", "Mitsuto Suzuki", "Shotaro Shima"],
     "tracks": [
       {
+        "id": "T014",
         "name": "Tifa's Theme - Seventh Heaven",
         "altNames": "Tifa's Theme",
         "lengthSec": 131,
@@ -177,6 +191,7 @@
     "artists": ["Takeru Kanazaki", "Hiroki Morishita", "Rei Kondoh"],
     "tracks": [
       {
+        "id": "T015",
         "name": "Fódlan Winds",
         "altNames": "Fodlan Winds",
         "lengthSec": 158,
@@ -193,6 +208,7 @@
     "artists": ["Keiichi Okabe", "Keigo Hoashi", "Kuniyuki Takahashi", "Kakeru Ishihama"],
     "tracks": [
       {
+        "id": "T017",
         "name": "City Ruins",
         "artists": ["Keiichi Okabe"],
         "lengthSec": 116,
@@ -209,6 +225,7 @@
     "artists": [],
     "tracks": [
       {
+        "id": "T018",
         "name": "Xpander",
         "artists": ["Sasha"],
         "lengthSec": 247,
@@ -223,12 +240,14 @@
     "artists": ["C418", "Lena Raine"],
     "tracks": [
       {
+        "id": "T019",
         "name": "Pigstep",
         "artists": ["Lena Raine"],
         "lengthSec": 145,
         "createdAt": "2020-11-29"
       },
       {
+        "id": "T020",
         "name": "Sweden",
         "artists": ["C418"],
         "lengthSec": 215,

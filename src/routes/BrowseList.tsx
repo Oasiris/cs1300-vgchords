@@ -264,15 +264,15 @@ const FilterButton: React.FC<{
 
 type TableProps = {
     tracklist: TrackR[]
-    // sorts: string[][]
-    // filters: Dictionary<string, string[]>
     getSortStatus: any
     getActiveFilterItems: any
+    getIsFavorite: any
 
     handleClickSort: any
     handleChangeFilter: any
     handleOpenModal: any
     handleCloseModal: any
+    handleToggleFavorite: any
 
     openModal: string | null
 }
@@ -327,39 +327,37 @@ class Table extends React.Component<TableProps> {
                 <div className="_body">
                     {this.props.tracklist.map((track, idx) => (
                         <div className="_bodyRow" key={idx}>
-                            {/* <div className="_bodyRowItem">
-                                <div className="albumArtPlaceholder" />
-                            </div>
-                            <div className="_bodyRowItem">{track.game.name}</div>
-                            <div className="_bodyRowItem">{track.name}</div>
-                            <div className="_bodyRowItem">
-                                {track.artists ? track.artists.join(', ') : track.game.artists.join(', ')}
-                            </div>
-                            <div className="_bodyRowItem">{track.game.releaseYear}</div>
-                            <div className="_bodyRowItem">{moment(track.createdAt).fromNow()}</div>
-                            <div className="_bodyRowItem _favoriteButton">
-                                <i className="far fa-heart" />
-                            </div> */}
-                            {labels.map((cell, labelIdx) => (
-                                <div
-                                    key={labelIdx}
-                                    className="_bodyRowItem"
-                                    style={{ flex: cell.flex }}
-                                    data-value={cell.getField(track)}
-                                >
-                                    {cell.getDisplay(track)}
-                                </div>
-                            ))}
+                            {labels.map((cell, labelIdx) =>
+                                cell.name !== 'Favorite' ? (
+                                    <div
+                                        key={labelIdx}
+                                        className="_bodyRowItem"
+                                        style={{ flex: cell.flex }}
+                                        data-value={cell.getField(track)}
+                                    >
+                                        {cell.getDisplay(track)}
+                                    </div>
+                                ) : (
+                                    <div
+                                        key={labelIdx}
+                                        className="_bodyRowItem"
+                                        style={{ flex: cell.flex }}
+                                        data-value={cell.getField(track)}
+                                        onClick={() => this.props.handleToggleFavorite(track.id)}
+                                    >
+                                        <div className="_favoriteButton">
+                                            {this.props.getIsFavorite(track.id) ? (
+                                                <i className="fas fa-heart" />
+                                            ) : (
+                                                <i className="far fa-heart" />
+                                            )}
+                                        </div>
+                                    </div>
+                                ),
+                            )}
                         </div>
                     ))}
                 </div>
-                {/* {ALL_TRACKS.map((track, idx) => (
-                    <li key="idx">
-                        <div>{track.name}</div>
-                        <div>{track.game.name}</div>
-                    </li>
-                ))}
-                 */}
             </div>
         )
     }
@@ -369,6 +367,9 @@ type BrowseListState = {
     sorts: string[][]
     filters: Dictionary<string, string[]>
     openModal: string | null
+
+    /** T001: false, T002: true, and so on. */
+    favoriteIds: Dictionary<string, boolean>
 }
 
 export class BrowseList extends React.Component<{}, BrowseListState> {
@@ -377,6 +378,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         sorts: [],
         filters: {},
         openModal: null,
+        favoriteIds: {},
     }
 
     getSortStatusForLabel = (labelName: string): 'asc' | 'desc' | null => {
@@ -392,6 +394,10 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
 
     getActiveFilterItemsForLabel = (labelName: string): string[] => {
         return this.state.filters[labelName] || []
+    }
+
+    getIsFavorite = (trackId: string): boolean => {
+        return Boolean(this.state.favoriteIds[trackId])
     }
 
     handleClickSort = (labelName: string) => {
@@ -433,6 +439,15 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
 
             return {
                 filters: prevState.filters,
+            }
+        })
+    }
+
+    handleToggleFavorite = (trackId: string) => {
+        this.setState((prevState) => {
+            prevState.favoriteIds[trackId] = !prevState.favoriteIds[trackId]
+            return {
+                favoriteIds: prevState.favoriteIds,
             }
         })
     }
@@ -488,7 +503,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         }
 
         return (
-            <Layout pageTitle="Browse Music">
+            <Layout pageTitle="Browse Music" favoriteIds={this.state.favoriteIds}>
                 <div className="container">
                     <div style={{ height: '12.5px' }} />
                     <span>To filter or sort, hover over the table heading.</span>
@@ -497,10 +512,12 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                         tracklist={tracklist}
                         getSortStatus={this.getSortStatusForLabel}
                         getActiveFilterItems={this.getActiveFilterItemsForLabel}
+                        getIsFavorite={this.getIsFavorite}
                         // sorts={this.state.sorts}
                         // filters={this.state.filters}
                         handleClickSort={this.handleClickSort}
                         handleChangeFilter={this.handleChangeFilter}
+                        handleToggleFavorite={this.handleToggleFavorite}
                         handleOpenModal={this.handleOpenModal}
                         handleCloseModal={this.handleCloseModal}
                         openModal={this.state.openModal}

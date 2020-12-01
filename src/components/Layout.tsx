@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Dictionary } from '../models/common'
+
 import { HexButton as Button } from '../components/Button'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
@@ -43,14 +45,18 @@ type LayoutType = {
 
     /** Page content. Goes in section#content. */
     children?: any
+
+    favoriteIds?: Dictionary<string, boolean>
 }
 
 /** @param children Page content. Goes in section#content. */
-export const Layout: React.FC<LayoutType> = ({ pageTitle, children }) => {
+export const Layout: React.FC<LayoutType> = ({ pageTitle, children, favoriteIds }) => {
     return (
         <div id="layout">
             <GlobalDecoration />
-            <Header>{pageTitle === 'Browse Music' ? <BrowseMusicTitle /> : <WipTitle />}</Header>
+            <Header favoriteIds={favoriteIds}>
+                {pageTitle === 'Browse Music' ? <BrowseMusicTitle /> : <WipTitle />}
+            </Header>
             <section id="content">{children}</section>
             <Footer />
         </div>
