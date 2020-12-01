@@ -8,6 +8,7 @@ import { Dictionary } from '../models/common'
 import { TrackR } from '../models/game'
 import { getMinSec } from '../utils/util'
 
+import { MinorButton } from '../components/Button'
 import { Layout } from '../components/Layout'
 import { ALL_TRACKS, GAME_TO_THUMB } from '../data/games'
 
@@ -46,6 +47,7 @@ const TableThumb: React.FC<{ track: TrackR }> = ({ track }) => {
                     alt={`Cover art for ${track.game.name}`}
                 />
             </div>
+            {/* Mouseover element. */}
             {mouseOver && (
                 <div id="_cursorAlbumArt" style={{ left: `${mouseX + 20}px`, top: `${mouseY - 280}px` }}>
                     <img
@@ -177,8 +179,18 @@ const FilterButton: React.FC<{
     handleOpenModal: any
     handleCloseModal: any
     handleChangeFilter: any
-}> = ({ labelName, activeItems, isModalOpen, handleOpenModal, handleCloseModal, handleChangeFilter }) => {
+    handleResetFilter: any
+}> = ({
+    labelName,
+    activeItems,
+    isModalOpen,
+    handleOpenModal,
+    handleCloseModal,
+    handleChangeFilter,
+    handleResetFilter,
+}) => {
     const handleOpen = () => handleOpenModal(labelName)
+    const handleReset = () => handleResetFilter(labelName)
 
     const labelEntry = fp.find((val) => val.name === labelName, labels)
     const isActive = activeItems.length > 0
@@ -190,6 +202,7 @@ const FilterButton: React.FC<{
             <div className={`_filterButton ${isActive ? '_filtering' : ''}`} onClick={handleOpen}>
                 <i className="fas fa-filter" />
             </div>
+            {/* Filter modal. */}
             <Modal
                 open={isModalOpen}
                 onClose={handleCloseModal}
@@ -224,6 +237,9 @@ const FilterButton: React.FC<{
                         ))}
                     </div>
                     <div />
+
+                    <div style={{ height: '12.5px' }} />
+                    <MinorButton children="Clear selections" onClick={handleReset} />
                 </div>
             </Modal>
         </>
@@ -238,6 +254,7 @@ type TableProps = {
 
     handleClickSort: any
     handleChangeFilter: any
+    handleResetFilter: any
     handleOpenModal: any
     handleCloseModal: any
     handleToggleFavorite: any
@@ -285,6 +302,7 @@ class Table extends React.Component<TableProps> {
                                             handleOpenModal={this.props.handleOpenModal}
                                             handleCloseModal={this.props.handleCloseModal}
                                             handleChangeFilter={this.props.handleChangeFilter}
+                                            handleResetFilter={this.props.handleResetFilter}
                                         />
                                     </>
                                 )}
@@ -388,6 +406,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         })
     }
 
+    /** Toggle the filter item for the given filter category. */
     handleChangeFilter = (labelName: string, filterItem: string, toggle: boolean) => {
         // TODO
         this.setState((prevState) => {
@@ -405,6 +424,16 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                 }
             }
 
+            return {
+                filters: prevState.filters,
+            }
+        })
+    }
+
+    /** Reset all filter items for the given filter category. */
+    handleResetFilter = (labelName: string) => {
+        this.setState((prevState) => {
+            prevState.filters[labelName] = []
             return {
                 filters: prevState.filters,
             }
@@ -483,6 +512,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                         getIsFavorite={this.getIsFavorite}
                         handleClickSort={this.handleClickSort}
                         handleChangeFilter={this.handleChangeFilter}
+                        handleResetFilter={this.handleResetFilter}
                         handleToggleFavorite={this.handleToggleFavorite}
                         handleOpenModal={this.handleOpenModal}
                         handleCloseModal={this.handleCloseModal}
