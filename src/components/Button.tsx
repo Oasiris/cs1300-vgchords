@@ -1,30 +1,50 @@
 import React from 'react'
 
 type ButtonProps = {
-    children: any
-    [key: string]: any
+    children?: any
+    [otherProps: string]: any
 }
 
 /** Major buttons. */
 export const HexButton: React.FC<ButtonProps> = ({ children, className, ...props }) => {
     return (
         <div className={`hexButton unselectable ${className || ''}`} {...props}>
-            <div />
+            <div /> {/* Left triangle */}
             <div>{children}</div>
-            <div />
+            <div /> {/* Right triangle */}
         </div>
     )
 }
 
-export const LinkButton: React.FC<ButtonProps> = ({ children, className, ...props }) => {
+type MinorButtonProps = {
+    children: any
+    className?: string
+    href?: string
+    target?: string
+    [otherProps: string]: any
+}
+
+export const MinorButton: React.FC<MinorButtonProps> = ({ children, className, href, target, ...props }) => {
+    const Wrapper: React.FC<{ children: any }> = ({ children: ch }) =>
+        href ? (
+            <a href={href} target={target || ''}>
+                {ch}
+            </a>
+        ) : (
+            <>{ch}</>
+        )
     return (
-        <div className={`linkButton unselectable ${className || ''}`} {...props}>
-            <div />
-            <div>
-                {children}
-                <div className="horizSpace" />→
+        <Wrapper>
+            <div className={`minorButton growSlight unselectable ${className || ''}`} {...props}>
+                <div /> {/* Left triangle */}
+                <div>
+                    <>
+                        {children}
+                        <div className="horizSpace" />→
+                    </>
+                </div>
+                <div /> {/* Right triangle */}
             </div>
-            <div />
-        </div>
+        </Wrapper>
     )
 }

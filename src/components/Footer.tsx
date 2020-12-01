@@ -16,6 +16,7 @@ export const Footer: React.FC = () => (
     <section id="footer">
         <div className="outerContainer">
             <FooterNav />
+            {/* TODO: Make About, Help, & Legal pages */}
             <div className="footerNavBar">
                 <a>About</a>
                 <a>Help</a>

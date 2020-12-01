@@ -1,13 +1,15 @@
 import React from 'react'
 
-type SearchType = {
-    placeholder?: string
+type SearchBarType = {
+    // placeholder?: string
+    [t: string]: any
 }
 
-export class Search extends React.Component<SearchType> {
+export class SearchBar extends React.Component<SearchBarType> {
     render() {
+        const props = { ...this.props }
         return (
-            <div id="primarySearchContainer">
+            <div id="primarySearchContainer" {...props}>
                 {/* <input
                     type="text"
                     placeholder={this.props.placeholder !== 'undefined' ? this.props.placeholder : 'Find game music...'}

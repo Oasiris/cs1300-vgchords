@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { HexButton as Button } from '../components/Button'
+import { SearchBar } from '../components/SearchBar'
 
 const HeaderNav: React.FC<{ children?: any }> = ({ children }) => (
     <div className="lineNavWrapper">
@@ -17,14 +18,18 @@ const HeaderNav: React.FC<{ children?: any }> = ({ children }) => (
 const HeaderTitle: React.FC<{ title: string; subtitle: string }> = ({ title, subtitle }) => (
     <div id="headerTitle">
         <div id="headerTitleRectangle" />
-        <span className="_subtitle">{subtitle}</span>
+        <span className="_subtitle">
+            {subtitle}
+            {/* Shadow */}
+            <div className="_shadow">{subtitle}</div>
+        </span>
         <h1 className="_title">
-            <a href="/">{title}</a>
+            <a href="/">
+                {title}
+                {/* Shadow */}
+                <div className="_shadow">{title}</div>
+            </a>
         </h1>
-        <div className="_shadow unselectable">
-            <span className="_subtitle">{subtitle}</span>
-            <h1 className="_title">{title}</h1>
-        </div>
     </div>
 )
 
@@ -33,7 +38,9 @@ export const Header: React.FC<{ children: any }> = ({ children }) => (
         <div className="outerContainer">
             <div className="row1">
                 <HeaderTitle title="VGChords" subtitle="Video Game Music Chord Compendium" />
-                <div>Search</div>
+                <div>
+                    <SearchBar />
+                </div>
                 <div id="favoritesDisplay">
                     <div className="unauthWarning">
                         NOT SIGNED IN

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { HexButton as MajorButton, LinkButton } from '../components/Button'
+import { HexButton as MajorButton, MinorButton as LinkButton } from '../components/Button'
 import { Layout } from '../components/Layout'
-import { Search } from '../components/Search'
+import { SearchBar as Search } from '../components/SearchBar'
 
 import logo from '../icons/logo.svg'
 
@@ -13,11 +13,12 @@ export const Home: React.FC = () => {
     return (
         <Layout pageTitle="Browse Music">
             <div className="container">
+                <div style={{ minHeight: '7.5vh' }} />
                 <div id="firstPrompt">To get started, search or pick a category.</div>
                 <Search />
                 <div style={{ height: '20px' }} />
-                <LinkButton>See all</LinkButton>
-                <div style={{ height: '85px' }} />
+                <LinkButton children="See all" href="/search" />
+                <div style={{ minHeight: '7.5vh' }} />
                 <div id="pickCategoryGrid">
                     <div>
                         Order by
@@ -34,6 +35,7 @@ export const Home: React.FC = () => {
                         <LinkButton children="Final Fantasy" />
                     </div>
                 </div>
+                <div style={{ height: '7.5vh' }} />
             </div>
         </Layout>
     )

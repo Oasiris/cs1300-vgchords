@@ -27,3 +27,17 @@
     -webkit-user-select: none;
     -o-user-select: none;
 }
+
+.grow {
+    transition: transform 0.05s ease-in-out;
+    &:hover {
+        transform: scale(1.045);
+    }
+}
+
+.growSlight {
+    transition: transform 0.05s ease-in-out;
+    &:hover {
+        transform: scale(1.02);
+    }
+}

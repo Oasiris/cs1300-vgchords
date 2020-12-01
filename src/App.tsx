@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import { BrowseList } from './routes/BrowseList'
 import { Home } from './routes/Home'
 
 import { LoremIpsum } from './components/LoremIpsum'
@@ -11,6 +12,7 @@ const Routes: React.FC = () => {
         <>
             <Switch>
                 <Route path="/" exact={true} component={Home} />
+                <Route path="/search" component={BrowseList} />
                 <Route path="/" component={NotFound} />
             </Switch>
         </>

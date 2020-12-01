@@ -42,7 +42,7 @@ type LayoutType = {
     pageTitle: PageTitle
 
     /** Page content. Goes in section#content. */
-    children: any
+    children?: any
 }
 
 /** @param children Page content. Goes in section#content. */
