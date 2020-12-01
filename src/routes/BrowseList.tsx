@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Modal } from '@material-ui/core'
+
 import fp from 'lodash/fp'
 import moment from 'moment'
 
@@ -103,14 +105,6 @@ const labels = [
 
 // function
 
-type TableProps = {
-    tracklist: TrackR[]
-    // sorts: string[][]
-    // filters: Dictionary<string, string[]>
-    getSortStatus: any
-    handleClickSort: any
-}
-
 const SortButton: React.FC<{ labelName: string; status: 'asc' | 'desc' | null; handleClickSort: any }> = ({
     labelName,
     status,
@@ -137,6 +131,47 @@ const SortButton: React.FC<{ labelName: string; status: 'asc' | 'desc' | null; h
             </div>
         )
     }
+}
+
+const FilterButton: React.FC<{
+    labelName: string
+    filterStatus: string[]
+    isModalOpen: boolean
+    handleOpenModal: any
+    handleCloseModal: any
+    handleChangeFilter: any
+}> = ({ labelName, filterStatus, isModalOpen, handleOpenModal, handleCloseModal, handleChangeFilter }) => {
+    const handleOpen = () => handleOpenModal(labelName)
+    return (
+        <>
+            <div className="_filterButton" onClick={handleOpen}>
+                <i className="fas fa-filter" />
+            </div>
+            <Modal
+                open={isModalOpen}
+                onClose={handleCloseModal}
+                aria-labelledby="select filter modal"
+                aria-describedby={`selects filter for ${labelName}`}
+            >
+                <div>hi</div>
+            </Modal>
+        </>
+    )
+}
+
+type TableProps = {
+    tracklist: TrackR[]
+    // sorts: string[][]
+    // filters: Dictionary<string, string[]>
+    getSortStatus: any
+    getFilterStatus: any
+
+    handleClickSort: any
+    handleChangeFilter: any
+    handleOpenModal: any
+    handleCloseModal: any
+
+    openModal: string | null
 }
 
 class Table extends React.Component<TableProps> {
@@ -169,9 +204,17 @@ class Table extends React.Component<TableProps> {
                                 {cell.filterType !== 'none' && (
                                     <>
                                         <div className="horizSpace" />
-                                        <div className="_filterButton">
+                                        {/* <div className="_filterButton">
                                             <i className="fas fa-filter" />
-                                        </div>
+                                        </div> */}
+                                        <FilterButton
+                                            labelName={cell.name}
+                                            filterStatus={this.props.getFilterStatus(cell.name)}
+                                            isModalOpen={this.props.openModal === cell.name}
+                                            handleOpenModal={this.props.handleOpenModal}
+                                            handleCloseModal={this.props.handleCloseModal}
+                                            handleChangeFilter={this.props.handleChangeFilter}
+                                        />
                                     </>
                                 )}
                             </div>
@@ -222,15 +265,17 @@ class Table extends React.Component<TableProps> {
 type BrowseListState = {
     sorts: string[][]
     filters: Dictionary<string, string[]>
+    openModal: string | null
 }
 export class BrowseList extends React.Component<{}, BrowseListState> {
-    state = {
+    state: BrowseListState = {
         /** Ordered from highest to lowest priority. */
         sorts: [],
         filters: {},
+        openModal: null,
     }
 
-    getSortStatusForLabel = (labelName: string, sorts: string[][]): 'asc' | 'desc' | null => {
+    getSortStatusForLabel = (labelName: string): 'asc' | 'desc' | null => {
         const currentSort = fp.find((val) => val[0] === labelName, this.state.sorts)
         if (currentSort === undefined) {
             return null
@@ -239,6 +284,10 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         } else {
             return 'desc'
         }
+    }
+
+    getFilterStatusForLabel = (labelName: string): string[] => {
+        return this.state.filters[labelName] || []
     }
 
     handleClickSort = (labelName: string) => {
@@ -261,16 +310,16 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         })
     }
 
-    handleClickDefault = () => {
-        this.setState({ sorts: [], filters: {} })
+    handleChangeFilter = (labelName: string, selected: string[]) => {
+        // TODO
     }
 
-    handleClickSortTitleAscending = () => {
-        this.setState({ sorts: [['Track name', 'asc']] })
+    handleOpenModal = (labelName: string) => {
+        console.log('Opening modal for ' + labelName)
+        this.setState({ openModal: labelName })
     }
-
-    handleClickSortYearDescending = () => {
-        this.setState({ sorts: [['Release year', 'desc']] })
+    handleCloseModal = () => {
+        this.setState({ openModal: null })
     }
 
     render() {
@@ -302,9 +351,6 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                 <div className="container">
                     <div style={{ height: '12.5px' }} />
                     <div style={{ display: 'flex' }}>
-                        <HexButton onClick={this.handleClickDefault}>Default</HexButton>
-                        <HexButton onClick={this.handleClickSortTitleAscending}>Sort by Track name, asc</HexButton>
-                        <HexButton onClick={this.handleClickSortYearDescending}>Sort by Year, desc</HexButton>
                         <HexButton>Filter: Kingdom Hearts</HexButton>
                         <HexButton>Filter: Yoko Shimomura</HexButton>
                     </div>
@@ -312,9 +358,14 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                     <Table
                         tracklist={tracklist}
                         getSortStatus={this.getSortStatusForLabel}
-                        handleClickSort={this.handleClickSort}
+                        getFilterStatus={this.getFilterStatusForLabel}
                         // sorts={this.state.sorts}
                         // filters={this.state.filters}
+                        handleClickSort={this.handleClickSort}
+                        handleChangeFilter={this.handleChangeFilter}
+                        handleOpenModal={this.handleOpenModal}
+                        handleCloseModal={this.handleCloseModal}
+                        openModal={this.state.openModal}
                     />
                 </div>
             </Layout>
