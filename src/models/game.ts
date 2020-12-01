@@ -24,3 +24,5 @@ export type Track = {
 }
 
 export type TrackR = Track & { game: Game }
+
+export type Thumb = { thumb: string }

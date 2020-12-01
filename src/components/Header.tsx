@@ -1,17 +1,17 @@
 import React from 'react'
 
 import { HexButton as Button } from '../components/Button'
-import { SearchBar } from '../components/SearchBar'
+// import { SearchBar } from '../components/SearchBar'
 
 const HeaderNav: React.FC<{ children?: any }> = ({ children }) => (
     <div className="lineNavWrapper">
         <div className="boldLineRack" />
         <div className="lineRackTitle">{children}</div>
-        <Button className="navRightButton rackButton">
+        {/* <Button className="navRightButton rackButton">
             <i className="fas fa-caret-right" />
             <div className="horizSpace" />
             SIGN IN
-        </Button>
+        </Button> */}
     </div>
 )
 
@@ -39,9 +39,7 @@ export const Header: React.FC<{ children: any }> = ({ children }) => (
             <div className="outerContainer">
                 <div className="row1">
                     <HeaderTitle title="VGChords" subtitle="Video Game Music Chord Compendium" />
-                    <div>
-                        <SearchBar />
-                    </div>
+                    <div>{/* <SearchBar /> */}</div>
                     <div id="favoritesDisplay">
                         <div className="unauthWarning">
                             NOT SIGNED IN

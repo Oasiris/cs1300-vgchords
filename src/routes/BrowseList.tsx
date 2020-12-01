@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, SyntheticEvent } from 'react'
 
 import { Modal } from '@material-ui/core'
 
@@ -6,11 +6,12 @@ import fp from 'lodash/fp'
 // import moment from 'moment'
 
 import { Dictionary } from '../models/common'
-import { Game, GameR, Track, TrackR } from '../models/game'
+import { Game, GameR, Thumb, Track, TrackR } from '../models/game'
 
 import { HexButton } from '../components/Button'
 import { Layout } from '../components/Layout'
 import data from '../data/games.json'
+import thumbData from '../data/thumbs.json'
 
 import '../styles/BrowseList.scss'
 
@@ -26,13 +27,65 @@ ALL_GAMERS.forEach(({ tracks, ...props }) => {
 /** Master data for the website. */
 const ALL_TRACKS: TrackR[] = fp.unnest(Object.values(GAME_TO_TRACKS)) as TrackR[]
 
+// Add thumbnail data.
+const ALL_THUMBS = thumbData as ({ name: string } & Thumb)[]
+const GAME_TO_THUMB: Dictionary<string, { thumb: string }> = {}
+ALL_THUMBS.forEach(({ name, thumb }) => {
+    GAME_TO_THUMB[name] = { thumb }
+})
+
+/** Table item thumbnail. Enlarges image on mouseover. */
+const TableThumb: React.FC<{ track: TrackR }> = ({ track }) => {
+    const handleMouseMove = (e: SyntheticEvent) => {
+        const x: number = (e.nativeEvent as any).clientX
+        const y: number = (e.nativeEvent as any).clientY
+        setMouseX(x)
+        setMouseY(y)
+    }
+
+    const handleMouseLeave = (e: SyntheticEvent) => {
+        setMouseOver(false)
+    }
+    const handleMouseEnter = (e: SyntheticEvent) => {
+        setMouseOver(true)
+    }
+
+    const [mouseOver, setMouseOver] = useState(false)
+    const [mouseX, setMouseX] = useState(0)
+    const [mouseY, setMouseY] = useState(0)
+
+    return (
+        <>
+            <div
+                className="_albumArt unselectable"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <img
+                    src={GAME_TO_THUMB[track.game.name] ? GAME_TO_THUMB[track.game.name]!.thumb : ''}
+                    alt={`Cover art for ${track.game.name}`}
+                />
+            </div>
+            {mouseOver && (
+                <div id="_cursorAlbumArt" style={{ left: `${mouseX + 20}px`, top: `${mouseY - 280}px` }}>
+                    <img
+                        src={GAME_TO_THUMB[track.game.name] ? GAME_TO_THUMB[track.game.name]!.thumb : ''}
+                        alt={`Cover art for ${track.game.name}`}
+                    />
+                </div>
+            )}
+        </>
+    )
+}
+
 /** Info about the table columns and how to parse, sort, and filter using them. */
 const labels = [
     {
         label: '',
         name: 'Album art',
         getField: (track: TrackR) => '',
-        getDisplay: (track: TrackR) => <div className="albumArtPlaceholder" />,
+        getDisplay: (track: TrackR) => <TableThumb track={track} />,
         sortable: false,
         filterType: 'none',
         hideable: true,

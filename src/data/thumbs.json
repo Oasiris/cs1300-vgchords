@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Pokemon TCG 2",
+    "thumb": "/img/pokemon-tcg-2-cropped.jpg"
+  },
+  {
+    "name": "Monster Hunter: World",
+    "thumb": "/img/monster-hunter-world.jpg"
+  },
+  {
+    "name": "Pokemon G/S/C",
+    "thumb": "/img/pokemon-gold.jpg"
+  },
+  {
+    "name": "Skullgirls",
+    "thumb": "/img/skullgirls-ost.jpg"
+  },
+  {
+    "name": "Kingdom Hearts",
+    "thumb": "/img/kingdom-hearts-ost.jpg"
+  },
+  {
+    "name": "Kingdom Hearts 2",
+    "thumb": "/img/kingdom-hearts-2-ost.jpg"
+  },
+  {
+    "name": "Super Mario RPG",
+    "thumb": "/img/super-mario-rpg-ost.jpg"
+  },
+  {
+    "name": "Final Fantasy XIII",
+    "thumb": "/img/ffxiii-ost-cover.jpg"
+  },
+  {
+    "name": "Final Fantasy VII Remake",
+    "thumb": "/img/ff7-remake-ost.jpg"
+  },
+  {
+    "name": "Fire Emblem: Three Houses",
+    "thumb": "/img/fire-emblem-three-houses.jpg"
+  },
+  {
+    "name": "NieR:Automata",
+    "thumb": "/img/nier-automata.jpg"
+  },
+  {
+    "name": "Wipeout 3",
+    "thumb": "/img/wip3out.jpeg"
+  },
+  {
+    "name": "Minecraft",
+    "thumb": "/img/minecraft-volume-alpha.jpg"
+  }
+]
