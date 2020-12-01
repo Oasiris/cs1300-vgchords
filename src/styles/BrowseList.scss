@@ -42,8 +42,10 @@ div#trackTable {
         padding: 0 7.5px 0 7.5px;
         color: $dark50;
     }
+
     ._headRowItem._sortable {
         ._sortButton {
+            color: $dark40;
             font-size: 16px;
             padding: 0 2.5px;
             opacity: 0;
@@ -53,7 +55,19 @@ div#trackTable {
                 opacity: 1;
             }
         }
+        ._sortButton:hover {
+            color: $dark60;
+        }
+
+        ._sortButton._asc,
+        ._sortButton._asc:hover,
+        ._sortButton._desc,
+        ._sortButton._desc:hover {
+            opacity: 1;
+            color: $globalText;
+        }
     }
+
     ._headRowItem._filterable {
         ._filterButton {
             font-size: 16px;

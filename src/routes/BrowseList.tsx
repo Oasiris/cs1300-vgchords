@@ -73,7 +73,7 @@ const labels = [
         sortable: true,
         filterType: 'range',
         hideable: true,
-        flex: '0 0 85px',
+        flex: '0 0 84px',
     },
     {
         label: 'Upload date',
@@ -83,7 +83,7 @@ const labels = [
         sortable: true,
         filterType: 'range',
         hideable: true,
-        flex: '2 1 0',
+        flex: '0 0 101px',
     },
     {
         label: '',
@@ -101,12 +101,44 @@ const labels = [
     },
 ]
 
+// function
+
 type TableProps = {
     tracklist: TrackR[]
-    sorts: string[][]
-    filters: Dictionary<string, string[]>
+    // sorts: string[][]
+    // filters: Dictionary<string, string[]>
+    getSortStatus: any
     handleClickSort: any
 }
+
+const SortButton: React.FC<{ labelName: string; status: 'asc' | 'desc' | null; handleClickSort: any }> = ({
+    labelName,
+    status,
+    handleClickSort,
+}) => {
+    const handle = () => handleClickSort(labelName)
+
+    if (status === null) {
+        return (
+            <div className="_sortButton" onClick={handle}>
+                <i className="fas fa-arrow-down" />
+            </div>
+        )
+    } else if (status === 'asc') {
+        return (
+            <div className="_sortButton _asc" onClick={handle}>
+                <i className="fas fa-arrow-down" />
+            </div>
+        )
+    } else {
+        return (
+            <div className="_sortButton _desc" onClick={handle}>
+                <i className="fas fa-arrow-up" />
+            </div>
+        )
+    }
+}
+
 class Table extends React.Component<TableProps> {
     render() {
         return (
@@ -126,12 +158,11 @@ class Table extends React.Component<TableProps> {
                                 {cell.sortable && (
                                     <>
                                         <div className="horizSpace" />
-                                        <div
-                                            className="_sortButton"
-                                            onClick={() => this.props.handleClickSort(cell.name)}
-                                        >
-                                            <i className="fas fa-arrow-down" />
-                                        </div>
+                                        <SortButton
+                                            labelName={cell.name}
+                                            status={this.props.getSortStatus(cell.name)}
+                                            handleClickSort={this.props.handleClickSort}
+                                        />
                                     </>
                                 )}
 
@@ -199,6 +230,17 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         filters: {},
     }
 
+    getSortStatusForLabel = (labelName: string, sorts: string[][]): 'asc' | 'desc' | null => {
+        const currentSort = fp.find((val) => val[0] === labelName, this.state.sorts)
+        if (currentSort === undefined) {
+            return null
+        } else if (currentSort[1] === 'asc') {
+            return 'asc'
+        } else {
+            return 'desc'
+        }
+    }
+
     handleClickSort = (labelName: string) => {
         this.setState((prevState) => {
             // Check if currentSorts has anything for the current labelName.
@@ -208,8 +250,9 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                     sorts: [[labelName, 'asc']].concat(prevState.sorts),
                 }
             } else if (prevState.sorts[currentSortIdx][1] === 'asc') {
-                prevState.sorts[currentSortIdx][1] = 'desc'
-                return { sorts: prevState.sorts }
+                // Splice out currentSort, then add descending sort.
+                prevState.sorts.splice(currentSortIdx, 1)
+                return { sorts: [[labelName, 'desc']].concat(prevState.sorts) }
             } else {
                 // Splice out currentSort.
                 prevState.sorts.splice(currentSortIdx, 1)
@@ -268,9 +311,10 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
                     <div style={{ height: '12.5px' }} />
                     <Table
                         tracklist={tracklist}
+                        getSortStatus={this.getSortStatusForLabel}
                         handleClickSort={this.handleClickSort}
-                        sorts={this.state.sorts}
-                        filters={this.state.filters}
+                        // sorts={this.state.sorts}
+                        // filters={this.state.filters}
                     />
                 </div>
             </Layout>
