@@ -7,7 +7,7 @@ type ButtonProps = {
 
 export const HexButton: React.FC<ButtonProps> = ({ children, className, ...props }) => {
     return (
-        <div className={`hexButton ${className || ''}`} {...props}>
+        <div className={`hexButton unselectable ${className || ''}`} {...props}>
             <div />
             <div>{children}</div>
             <div />

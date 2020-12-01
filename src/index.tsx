@@ -9,6 +9,7 @@ import App from './App'
 import './styles/lib/bootstrap-grid.min.css'
 import './styles/lib/normalize.css'
 import './styles/index.scss'
+import './styles/global.scss'
 
 import { ErrorBoundary } from './components/ErrorBoundary'
 

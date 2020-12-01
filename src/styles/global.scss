@@ -1,0 +1,29 @@
+.horizSpace {
+    display: inline-flex;
+    width: 7.5px;
+}
+
+.outerContainer {
+    margin: 0 auto;
+    width: calc(100vw - 210px);
+}
+
+.container {
+    margin: 0 auto;
+    width: calc(92.5vw - 200px);
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1375px;
+    }
+}
+
+.unselectable,
+.us {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
