@@ -1,0 +1,132 @@
+@import 'colors';
+
+._favesModalWrapper {
+    & > div:first-child {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    ._modalBase {
+        position: relative;
+
+        background: rgba($globalText, 0.965);
+        color: white;
+        &:focus {
+            outline: none;
+        }
+        height: 100%;
+        float: right;
+        min-width: 450px;
+
+        overflow-y: scroll;
+
+        padding: 100px 52.5px;
+    }
+
+    .unauthWarning {
+        position: absolute;
+        top: 40px;
+        right: 52.5px;
+    }
+
+    .backButton {
+        & > div {
+            position: absolute;
+            top: 40px;
+        }
+        & > div:first-child {
+            left: 50px;
+            height: 26px;
+            width: 1px;
+            background: white;
+        }
+        & > div:nth-child(2) {
+            left: 53px;
+            height: 26px;
+            width: 2px;
+            background: white;
+        }
+        & > div:nth-child(3) {
+            left: 57px;
+            height: 26px;
+            width: 14px;
+            background: white;
+        }
+        & > div:nth-child(3) {
+            left: 57px;
+            height: 26px;
+            width: 14px;
+            background: white;
+        }
+        & > div:nth-child(4) {
+            width: 0;
+            height: 0;
+            left: 71px;
+            border-style: solid;
+            border-width: 13px 0 13px 10px;
+            border-color: transparent transparent transparent white;
+        }
+    }
+
+    ._title {
+        margin-top: 27px;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.005em;
+    }
+
+    .boldLineRack {
+        // position: absolute;
+        // top: 160px;
+        margin-top: 6px;
+        margin-bottom: 27.5px;
+        height: 3px;
+        width: calc(100%);
+        background: white;
+    }
+
+    ._faveItems {
+        min-height: 66.5vh;
+        & > div {
+            display: grid;
+            grid-template-columns: 72.5px auto;
+            .thumbWrapper {
+                img {
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            font-weight: 500;
+
+            margin-bottom: 17.5px;
+        }
+        .trackName {
+            font-size: 16px;
+            line-height: 1.1;
+        }
+        .time {
+            letter-spacing: -0.02em;
+            font-size: 15px;
+            margin-bottom: 1px;
+        }
+        .gameName {
+            font-size: 14.25px;
+            color: rgba(white, 0.8);
+        }
+        .artists {
+            font-size: 13.25px;
+            color: rgba(white, 0.7);
+        }
+    }
+
+    ._totalLength {
+        margin-top: 55px;
+        text-align: right;
+        color: rgba(white, 0.92);
+        font-size: 19px;
+        letter-spacing: -0.025em;
+        font-weight: 700;
+        & > div {
+            display: inline-block;
+        }
+    }
+}

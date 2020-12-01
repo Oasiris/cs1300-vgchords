@@ -3,36 +3,36 @@ import React, { useState, SyntheticEvent } from 'react'
 import { Modal } from '@material-ui/core'
 
 import fp from 'lodash/fp'
-// import moment from 'moment'
 
 import { Dictionary } from '../models/common'
 import { Game, GameR, Thumb, Track, TrackR } from '../models/game'
+import { getMinSec } from '../utils/util'
 
 import { HexButton } from '../components/Button'
 import { Layout } from '../components/Layout'
-import data from '../data/games.json'
-import thumbData from '../data/thumbs.json'
+import { ALL_TRACKS, GAME_TO_THUMB } from '../data/games'
 
 import '../styles/BrowseList.scss'
+// import moment from 'moment'
 
-const ALL_GAMERS = data as GameR[]
+// const ALL_GAMERS = data as GameR[]
 
-const GAME_TO_TRACKS: Dictionary<string, TrackR[]> = {}
-ALL_GAMERS.forEach(({ tracks, ...props }) => {
-    const game = props
-    const trackRs = tracks.map((track) => ({ ...track, game }))
-    GAME_TO_TRACKS[props.name] = trackRs
-})
+// const GAME_TO_TRACKS: Dictionary<string, TrackR[]> = {}
+// ALL_GAMERS.forEach(({ tracks, ...props }) => {
+//     const game = props
+//     const trackRs = tracks.map((track) => ({ ...track, game }))
+//     GAME_TO_TRACKS[props.name] = trackRs
+// })
 
-/** Master data for the website. */
-const ALL_TRACKS: TrackR[] = fp.unnest(Object.values(GAME_TO_TRACKS)) as TrackR[]
+// /** Master data for the website. */
+// const ALL_TRACKS: TrackR[] = fp.unnest(Object.values(GAME_TO_TRACKS)) as TrackR[]
 
-// Add thumbnail data.
-const ALL_THUMBS = thumbData as ({ name: string } & Thumb)[]
-const GAME_TO_THUMB: Dictionary<string, { thumb: string }> = {}
-ALL_THUMBS.forEach(({ name, thumb }) => {
-    GAME_TO_THUMB[name] = { thumb }
-})
+// // Add thumbnail data.
+// const ALL_THUMBS = thumbData as ({ name: string } & Thumb)[]
+// const GAME_TO_THUMB: Dictionary<string, { thumb: string }> = {}
+// ALL_THUMBS.forEach(({ name, thumb }) => {
+//     GAME_TO_THUMB[name] = { thumb }
+// })
 
 /** Table item thumbnail. Enlarges image on mouseover. */
 const TableThumb: React.FC<{ track: TrackR }> = ({ track }) => {
@@ -149,8 +149,7 @@ const labels = [
         label: 'Length',
         name: 'Track length',
         getField: (track: TrackR) => track.lengthSec,
-        getDisplay: (track: TrackR) =>
-            `${Math.floor(track.lengthSec / 60)}:${String(track.lengthSec % 60).padStart(2, '0')}`,
+        getDisplay: (track: TrackR) => getMinSec(track.lengthSec),
         sortable: true,
         filterType: 'none',
         hideable: true,

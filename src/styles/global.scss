@@ -5,17 +5,17 @@
 
 .outerContainer {
     margin: 0 auto;
-    width: calc(100vw - 210px);
+    width: calc(100vw - 180px);
 }
 
 .container {
     margin: 0 auto;
-    width: calc(95vw - 205px);
+    width: calc(95vw - 200px);
 }
 
 @media (min-width: 1200px) {
     .container {
-        max-width: calc(95vw - 205px);
+        max-width: calc(95vw - 200px);
     }
 }
 
