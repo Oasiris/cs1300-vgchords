@@ -15,7 +15,6 @@ import data from '../data/games.json'
 import '../styles/BrowseList.scss'
 
 const ALL_GAMERS = data as GameR[]
-// const ALL_GAMES = ALL_GAMERS.map(({ ...els }) => ({ ...els, tracks: null }))
 
 const GAME_TO_TRACKS: Dictionary<string, TrackR[]> = {}
 ALL_GAMERS.forEach(({ tracks, ...props }) => {
@@ -24,8 +23,10 @@ ALL_GAMERS.forEach(({ tracks, ...props }) => {
     GAME_TO_TRACKS[props.name] = trackRs
 })
 
+/** Master data for the website. */
 const ALL_TRACKS: TrackR[] = fp.unnest(Object.values(GAME_TO_TRACKS)) as TrackR[]
 
+/** Info about the table columns and how to parse, sort, and filter using them. */
 const labels = [
     {
         label: '',
@@ -150,21 +151,22 @@ const SortButton: React.FC<{ labelName: string; status: 'asc' | 'desc' | null; h
 
 const FilterButton: React.FC<{
     labelName: string
-    filterStatus: string[]
+    activeItems: string[]
     isModalOpen: boolean
     handleOpenModal: any
     handleCloseModal: any
     handleChangeFilter: any
-}> = ({ labelName, filterStatus, isModalOpen, handleOpenModal, handleCloseModal, handleChangeFilter }) => {
+}> = ({ labelName, activeItems, isModalOpen, handleOpenModal, handleCloseModal, handleChangeFilter }) => {
     const handleOpen = () => handleOpenModal(labelName)
 
     const labelEntry = fp.find((val) => val.name === labelName, labels)
-    const enabledFilters = filterStatus
-    const disabledFilters = fp.difference(labelEntry!.filterOptions!, filterStatus)
+    const isActive = activeItems.length > 0
+    const enabledFilters = activeItems
+    const disabledFilters = fp.difference(labelEntry!.filterOptions!, activeItems)
 
     return (
         <>
-            <div className="_filterButton" onClick={handleOpen}>
+            <div className={`_filterButton ${isActive ? '_filtering' : ''}`} onClick={handleOpen}>
                 <i className="fas fa-filter" />
             </div>
             <Modal
@@ -212,7 +214,7 @@ type TableProps = {
     // sorts: string[][]
     // filters: Dictionary<string, string[]>
     getSortStatus: any
-    getFilterStatus: any
+    getActiveFilterItems: any
 
     handleClickSort: any
     handleChangeFilter: any
@@ -257,7 +259,7 @@ class Table extends React.Component<TableProps> {
                                         </div> */}
                                         <FilterButton
                                             labelName={cell.name}
-                                            filterStatus={this.props.getFilterStatus(cell.name)}
+                                            activeItems={this.props.getActiveFilterItems(cell.name)}
                                             isModalOpen={this.props.openModal === cell.name}
                                             handleOpenModal={this.props.handleOpenModal}
                                             handleCloseModal={this.props.handleCloseModal}
@@ -315,6 +317,7 @@ type BrowseListState = {
     filters: Dictionary<string, string[]>
     openModal: string | null
 }
+
 export class BrowseList extends React.Component<{}, BrowseListState> {
     state: BrowseListState = {
         /** Ordered from highest to lowest priority. */
@@ -334,7 +337,7 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
         }
     }
 
-    getFilterStatusForLabel = (labelName: string): string[] => {
+    getActiveFilterItemsForLabel = (labelName: string): string[] => {
         return this.state.filters[labelName] || []
     }
 
@@ -435,15 +438,12 @@ export class BrowseList extends React.Component<{}, BrowseListState> {
             <Layout pageTitle="Browse Music">
                 <div className="container">
                     <div style={{ height: '12.5px' }} />
-                    <div style={{ display: 'flex' }}>
-                        <HexButton>Filter: Kingdom Hearts</HexButton>
-                        <HexButton>Filter: Yoko Shimomura</HexButton>
-                    </div>
+                    <span>To filter or sort, hover over the table heading.</span>
                     <div style={{ height: '12.5px' }} />
                     <Table
                         tracklist={tracklist}
                         getSortStatus={this.getSortStatusForLabel}
-                        getFilterStatus={this.getFilterStatusForLabel}
+                        getActiveFilterItems={this.getActiveFilterItemsForLabel}
                         // sorts={this.state.sorts}
                         // filters={this.state.filters}
                         handleClickSort={this.handleClickSort}

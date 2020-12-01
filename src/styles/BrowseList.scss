@@ -80,6 +80,15 @@ div#trackTable {
                 opacity: 1;
             }
         }
+        ._filterButton:hover {
+            color: $dark60;
+        }
+
+        ._filterButton._filtering,
+        ._filterButton._filtering:hover {
+            opacity: 1;
+            color: $globalText;
+        }
     }
 
     ._body {
